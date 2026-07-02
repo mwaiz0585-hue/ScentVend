@@ -1,25 +1,34 @@
 import React from 'react';
-import {ActivityIndicator, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, StatusBar, StyleSheet, Text, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {colors, radius, spacing} from '../styles/theme';
+
+import {colors} from '../styles/theme';
 
 export default function SplashScreen() {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <StatusBar barStyle="dark-content" backgroundColor="#FFF7FC" />
+
       <View style={styles.container}>
-        <View style={styles.logoCard}>
-          <Text style={styles.emoji}>🌸</Text>
-          <Text style={styles.logo}>ScentVend</Text>
-          <Text style={styles.tagline}>
-            Smart perfume vending with AI-style matching, QR unlock, and stock
-            tracking.
-          </Text>
+        <View style={styles.logoCircle}>
+          <Text style={styles.logoEmoji}>🌸</Text>
+        </View>
 
-          <ActivityIndicator size="large" color={colors.action} />
+        <Text style={styles.appName}>ScentVend</Text>
 
-          <Text style={styles.loadingText}>Preparing your demo app...</Text>
+        <Text style={styles.title}>Smart Perfume Vending</Text>
+
+        <Text style={styles.subtitle}>
+          Find your scent, pay securely, and unlock your perfume vending machine.
+        </Text>
+
+        <View style={styles.loadingBox}>
+          <ActivityIndicator size="large" color="#FF4AA2" />
+          <Text style={styles.loadingText}>Loading your fragrance experience...</Text>
         </View>
       </View>
+
+      <Text style={styles.footerText}>Customer • Machine • Admin</Text>
     </SafeAreaView>
   );
 }
@@ -27,40 +36,70 @@ export default function SplashScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: '#FFF7FC',
   },
   container: {
     flex: 1,
-    padding: spacing.screen,
-    justifyContent: 'center',
-  },
-  logoCard: {
-    backgroundColor: colors.card,
-    borderRadius: 32,
-    padding: 28,
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 28,
+  },
+  logoCircle: {
+    width: 118,
+    height: 118,
+    borderRadius: 59,
+    backgroundColor: '#FFFFFF',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 22,
     borderWidth: 1,
-    borderColor: colors.border,
+    borderColor: '#F4D9FF',
+    shadowColor: '#FF4AA2',
+    shadowOpacity: 0.18,
+    shadowRadius: 16,
+    shadowOffset: {
+      width: 0,
+      height: 8,
+    },
+    elevation: 6,
   },
-  emoji: {
-    fontSize: 64,
-    marginBottom: 14,
+  logoEmoji: {
+    fontSize: 58,
   },
-  logo: {
-    color: colors.primary,
-    fontSize: 34,
+  appName: {
+    color: '#FF4AA2',
+    fontSize: 32,
     fontWeight: '900',
-    marginBottom: 10,
+    marginBottom: 8,
   },
-  tagline: {
-    color: colors.text,
+  title: {
+    color: '#1E1336',
+    fontSize: 28,
+    fontWeight: '900',
+    textAlign: 'center',
+    marginBottom: 12,
+  },
+  subtitle: {
+    color: '#6B5E7A',
     textAlign: 'center',
     lineHeight: 22,
-    marginBottom: 24,
+    fontSize: 15,
+    marginBottom: 30,
+  },
+  loadingBox: {
+    alignItems: 'center',
+    marginTop: 8,
   },
   loadingText: {
-    color: colors.muted,
-    marginTop: 18,
+    color: '#8B7A99',
+    marginTop: 14,
+    fontWeight: '700',
+    textAlign: 'center',
+  },
+  footerText: {
+    color: '#8B7A99',
+    textAlign: 'center',
     fontWeight: '800',
+    marginBottom: 24,
   },
 });

@@ -51,6 +51,8 @@ const initialCriteria: Criteria = {
 };
 
 export default function App() {
+  const [appBooted, setAppBooted] = useState(false);
+
   const [userName, setUserName] = useState('');
   const [userRole, setUserRole] = useState<UserRole>('customer');
 
@@ -68,6 +70,14 @@ export default function App() {
 
   const [ordersLoaded, setOrdersLoaded] = useState(false);
   const [inventoryLoaded, setInventoryLoaded] = useState(false);
+
+  useEffect(() => {
+    const bootTimer = setTimeout(() => {
+      setAppBooted(true);
+    }, 2200);
+
+    return () => clearTimeout(bootTimer);
+  }, []);
 
   useEffect(() => {
     async function loadSavedData() {
@@ -154,7 +164,7 @@ export default function App() {
   const currentOrder =
     orders.find(order => order.code === unlockCode) || selectedOrder || null;
 
-  if (!ordersLoaded || !inventoryLoaded) {
+  if (!appBooted || !ordersLoaded || !inventoryLoaded) {
     return <SplashScreen />;
   }
 
